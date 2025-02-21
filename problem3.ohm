@@ -1,35 +1,35 @@
 ExLang {
-    Program = FunctionDeclaration* Exp
+    Program 		= FunctionDeclaration* Exp
     FunctionDeclaration = "func" id "(" (id ("," id)*)? ")" Body "end"
-    Body = ListOf<Exp, ";">
-    FuncCall = id "[" (id ("," id)*)? "]"
+    Body 		= ListOf<Exp, ";">
+    FuncCall 		= id "[" (id ("," id)*)? "]"
    
-	Exp = Exp1 "if" Exp1 "else" Exp --conditional
-    		| Exp1
-    Exp1 = stringLiteral
-            | Exp2
-    Exp2 = Exp2 ("+" | "-") Exp2			--binary
-    		| Exp3
-    Exp3 = Exp3 ("*" | "/") Exp          --binary
-    		| Exp4
-    Exp4 = "-" Exp4							--negation
-    		| Exp5
-    Exp5 = Exp5 "!"                      --factorial
+    Exp 		= Exp1 "if" Exp1 "else" Exp --conditional
+    			| Exp1
+    Exp1 		= stringLiteral
+            		| Exp2
+    Exp2 		= Exp2 ("+" | "-") Exp2			--binary
+    			| Exp3
+    Exp3 		= Exp3 ("*" | "/") Exp          	--binary
+    			| Exp4
+    Exp4 		= "-" Exp4				--negation
+    			| Exp5
+    Exp5 		= Exp5 "!"                      	--factorial
     			| Exp6
-    Exp6 = "(" Exp ")"						--parens
+    Exp6 		= "(" Exp ")"				--parens
     			| numericLiteral
-                | FuncCall
-                | id
+                	| FuncCall
+                	| id
                 
-    numericLiteral = digit+ ("." digit+)? (("e" | "E") ("+" | "-") digit+)?
-    stringLiteral = "\"" (escapeSeq | validLetter | space)*  "\""
-    id = ~keyWord (letter | "@") legalIDChar*
-    space      += "--" (~"\n" any)*                      --comment
+    numericLiteral 	= digit+ ("." digit+)? (("e" | "E") ("+" | "-") digit+)?
+    stringLiteral 	= "\"" (escapeSeq | validLetter | space)*  "\""
+    id 			= ~keyWord (letter | "@") legalIDChar*
+    space      		+= "--" (~"\n" any)*                    --comment
     
-    escapeSeq = "\\" ("\'" | "\"" | "n" | "\\" | hexNum)
-    validLetter = ~"\"" letter  //is this supped to be letter or any
-    hexNum = "u" "{" hexDigit hexDigit? hexDigit? hexDigit? hexDigit? hexDigit? "}"
-    reservedWords = "func" | "if" | "else" | "end"
-    keyWord = reservedWords ~legalIDChar
-    legalIDChar = letter | digit | "_" | "@" | "$"
+    escapeSeq 		= "\\" ("\'" | "\"" | "n" | "\\" | hexNum)
+    validLetter 	= ~"\"" letter  //is this supped to be letter or any
+    hexNum 		= "u" "{" hexDigit hexDigit? hexDigit? hexDigit? hexDigit? hexDigit? "}"
+    reservedWords 	= "func" | "if" | "else" | "end"
+    keyWord 		= reservedWords ~legalIDChar
+    legalIDChar 	= letter | digit | "_" | "@" | "$"
 }
