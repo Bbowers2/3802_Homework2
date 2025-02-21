@@ -18,31 +18,31 @@ const grammars = {
   `,
 
   masterCard: String.raw`
-    cardNum  = ("5" "1".."5" fourteenDigits) 		--startwith5
-    				 | (validNum twelveDigits)				--startwith2
+    cardNum  = ("5" "1".."5" fourteenDigits) 		    --startwith5
+    				 | (validNum twelveDigits)				      --startwith2
    	fourteenDigits = d d d d d d d d d d d d d d
 	  twelveDigits = d d d d d d d d d d d d
     d = digit
-	  validNum = "2" "2" "2" "1".."9" --from2221to2229
-             | "2" "2" "3".."9" digit --from2230to2299
-    				 | "2" "3".."6" digit digit  --from2300to2699
-             | "2" "7" ("0" | "1") digit	--from2700to2719
-             | "2" "7" "2" "0"			--just2720
+	  validNum = "2" "2" "2" "1".."9"                 --from2221to2229
+             | "2" "2" "3".."9" digit               --from2230to2299
+    				 | "2" "3".."6" digit digit             --from2300to2699
+             | "2" "7" ("0" | "1") digit	          --from2700to2719
+             | "2" "7" "2" "0"			                --just2720
     `,
 
   notThreeEndingInOO: String.raw`
     string = letter? part?
     part = ~illegal letter letter*			--OK
     		| illegal ~illegal letter*			--alsoOK
-  			| illegal illegal letter+			--grtThanThree
+  			| illegal illegal letter+			  --grtThanThree
 	  illegal = "O" | "o"
   `,
 
   divisibleBy16: String.raw`
 	  num = "1" nums		--largeNum
     		| "0"+
-    nums = "1" (zeros ~any | nums) --num
-    			| "0" ( threes | nums) --number
+    nums = "1" (zeros ~any | nums)  --num
+    			| "0" ( threes | nums)    --number
     zeros = "0" "0" "0" "0" ~any
     threes = "0" "0" "0" ~any
       `,
@@ -50,11 +50,11 @@ const grammars = {
   eightThroughThirtyTwo: String.raw`
 	  eightThru32  = single
     					   | ("1" | "2") digit 	--twoDigits
-                 | "3" "0".."2"			--two
+                 | "3" "0".."2"			  --two
 	  single = "8" | "9"   `,
 
   notPythonPycharmPyc: String.raw`
-    string = keywords letter+			--notKeyword
+    string = keywords letter+			    --notKeyword
     			| ~keywords letter* 
     keywords = "python" | "pycharm" | "pyc"  `,
 
@@ -64,12 +64,12 @@ const grammars = {
     decimal = "." digit*  `,
 
   palindromes2358: String.raw`
-    	palindromes = a six a 		--eightCharA
-    				| b six b			--eightCharB
+    	palindromes = a six a 		  --eightCharA
+    				| b six b			        --eightCharB
                     | c six c			--eightCharC
-                    | a three a			--fiveCharA
-                    | b three b			--fiveCharB
-                    |c three c				--fiveCharC
+                    | a three a		--fiveCharA
+                    | b three b		--fiveCharB
+                    |c three c		--fiveCharC
                     | three 				
                     | two
     six = a four a
