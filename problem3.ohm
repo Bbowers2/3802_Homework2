@@ -1,37 +1,34 @@
 ExLang {
-	
     Program = FunctionDeclaration* Exp
-    
-    FunctionDeclaration = "func" id "(" ListOf<id, ","> ")" Body "end"
+    FunctionDeclaration = "func" id "(" (id ("," id)*)? ")" Body "end"
     Body = ListOf<Exp, ";">
-    FuncCall = id "[" ListOf<id, ","> "]"
-
-    
-	Exp = Exp "if" Exp "else" Exp --conditional
-    		| stringLiteral		//exp needs to be seperate and first to need to be exp 1
-            | Exp1
-    Exp1 = Exp1 ("+" | "-") Exp1			--binary
-    		| Exp2
-    Exp2 = Exp2 ("*" | "/") Exp          --binary
+    FuncCall = id "[" (id ("," id)*)? "]"
+   
+	Exp = Exp1 "if" Exp1 "else" Exp --conditional
+    		| Exp1
+    Exp1 = stringLiteral
+            | Exp2
+    Exp2 = Exp2 ("+" | "-") Exp2			--binary
     		| Exp3
-    Exp3 = "-" Exp4							--negation
+    Exp3 = Exp3 ("*" | "/") Exp          --binary
     		| Exp4
-    Exp4 = Exp5 "!"                      --factorial
-    			| Exp5
-    Exp5 = "(" Exp ")"						--parens
+    Exp4 = "-" Exp4							--negation
+    		| Exp5
+    Exp5 = Exp5 "!"                      --factorial
+    			| Exp6
+    Exp6 = "(" Exp ")"						--parens
     			| numericLiteral
                 | FuncCall
                 | id
-    
-        
+                
     numericLiteral = digit+ ("." digit+)? (("e" | "E") ("+" | "-") digit+)?
-    stringLiteral = "\"" (escapeSeq | validLetter)* "\""
+    stringLiteral = "\"" (escapeSeq | validLetter | space)*  "\""
     id = ~keyWord (letter | "@") legalIDChar*
     comment = "--" (~"\n" any)*  ("\n" | end)
     
     escapeSeq = "\\" ("\'" | "\"" | "n" | "\\" | hexNum)
     validLetter = ~"\"" letter  //is this supped to be letter or any
-    hexNum = hexDigit hexDigit? hexDigit? hexDigit? hexDigit? hexDigit?
+    hexNum = "u" "{" hexDigit hexDigit? hexDigit? hexDigit? hexDigit? hexDigit? "}"
     reservedWords = "func" | "if" | "else" | "end"
     keyWord = reservedWords ~legalIDChar
     legalIDChar = letter | digit | "_" | "@" | "$"

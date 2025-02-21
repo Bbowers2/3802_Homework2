@@ -1,3 +1,5 @@
-func function (hello) 3 + 4 end
-func hello (string, word, @characters) 3+4*5/4; 4 if 3 else "four"; three end
-hello[thomas, walter, august]
+func hello() "hello" end
+func greet(boolean, name_, name$2, @name3) "hello"; name if bool else name2; name3 end
+func exp(num) 5*4+3/5-1 if (-19 + 3) * 5 else 5!; 10E+2; -4.8934e-3;  -num; hello[] end
+func function(string) "\' \" \n \\ \u{3A48}" end
+greet[true, @Bob, Bob, bob]
