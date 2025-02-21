@@ -24,7 +24,7 @@ ExLang {
     numericLiteral = digit+ ("." digit+)? (("e" | "E") ("+" | "-") digit+)?
     stringLiteral = "\"" (escapeSeq | validLetter | space)*  "\""
     id = ~keyWord (letter | "@") legalIDChar*
-    comment = "--" (~"\n" any)*  ("\n" | end)
+    space      += "--" (~"\n" any)*                      --comment
     
     escapeSeq = "\\" ("\'" | "\"" | "n" | "\\" | hexNum)
     validLetter = ~"\"" letter  //is this supped to be letter or any
