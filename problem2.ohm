@@ -1,0 +1,3 @@
+func function (hello) 3 + 4 end
+func hello (string, word, @characters) 3+4*5/4; 4 if 3 else "four"; three end
+hello[thomas, walter, august]
